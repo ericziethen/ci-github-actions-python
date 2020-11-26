@@ -16,3 +16,6 @@ jobs:
       # Print something
       - name: Placeholder printing
         run: echo "Placeholder printing"
+
+      - name: Fail Step
+        run: exit 1
