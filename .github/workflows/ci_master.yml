@@ -17,5 +17,8 @@ jobs:
       - name: Placeholder printing
         run: echo "Placeholder printing"
 
+      - name: Another Step
+        run: echo another step"
+
       - name: Fail Step
         run: exit 1
