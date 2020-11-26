@@ -15,7 +15,11 @@ jobs:
     steps:
       # Print something
       - name: Placeholder printing
+<<<<<<< HEAD
         run: echo "Placeholder printing"
 
       - name: Fail Step
         run: exit 1
+=======
+        run: echo "Placeholder printing"
+>>>>>>> Initial workflow
