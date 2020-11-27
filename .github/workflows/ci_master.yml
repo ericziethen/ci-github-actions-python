@@ -20,5 +20,12 @@ jobs:
       - name: Another Step
         run: echo "another step"
 
+
+  failed_job:
+    # The easiest way to deal with that to exclude the job that can faile from the merge checks on github
+    # That way the issue will be visible in the PR but can still be merged
+    name: Failed Job allowed to fail
+    runs-on: ubuntu-latest
+    steps:
       - name: Fail Step
         run: exit 1
