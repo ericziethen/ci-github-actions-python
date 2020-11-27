@@ -27,3 +27,6 @@ jobs:
     steps:
       - name: Fail Step
         run: exit 1
+
+      - name: Pass Job if earlier failiure
+        if: ${{ always() }}  #  https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#job-status-check-functions
