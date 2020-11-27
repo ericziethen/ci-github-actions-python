@@ -23,6 +23,7 @@ jobs:
 
   failed_job:
     name: Failed Job allowed to fail
+    runs-on: ubuntu-latest
     steps:
       - name: Fail Step
         run: exit 1
