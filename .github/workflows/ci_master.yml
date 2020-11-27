@@ -20,5 +20,9 @@ jobs:
       - name: Another Step
         run: echo "another step"
 
+
+  failed_job:
+    name: Failed Job allowed to fail
+    steps:
       - name: Fail Step
         run: exit 1
