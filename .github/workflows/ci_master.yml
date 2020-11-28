@@ -41,7 +41,6 @@ jobs:
         env:
           DJANGO_DB: ${{ matrix.django-db }}
           TOX_SKIP_ENV: ".*all_filter_volume_test.*"
-      - name: Print Environment Variables
         run: |
           echo DJANGO_DB: $DJANGO_DB
           echo TOX_SKIP_ENV: $TOX_SKIP_ENV
