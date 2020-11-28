@@ -1,7 +1,7 @@
 
 name: CI
 
-on: [pull_request]
+on: [pull_request, push]
 
 jobs:
   # Set the job key. The key is displayed as the job name
@@ -20,7 +20,6 @@ jobs:
       - name: Another Step
         run: echo "another step"
 
-
   failed_job:
     # The easiest way to deal with that to exclude the job that can faile from the merge checks on github
     # That way the issue will be visible in the PR but can still be merged
@@ -29,3 +28,22 @@ jobs:
     steps:
       - name: Fail Step
         run: exit 1
+
+  matrix_expansion_job:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.9, 3.8, 3,7, 3.6]
+        django-db: [SQLITE, POSTGRES]
+    name: Python ${{ matrix.python-version }} - Django DB ${{ matrix.django-db }}
+    steps:
+      - name: Set Environment Variables
+          env:
+            DJANGO_DB: ${{ matrix.django-db }}
+            TOX_SKIP_ENV: ".*all_filter_volume_test.*"
+      - name: Print Environment Variables
+        run: |
+          echo DJANGO_DB: $DJANGO_DB
+          echo TOX_SKIP_ENV: $TOX_SKIP_ENV
+      - name: Print Python Version
+        run: python --version --version
