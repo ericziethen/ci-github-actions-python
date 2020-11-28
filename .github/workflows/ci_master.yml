@@ -44,5 +44,9 @@ jobs:
         run: |
           echo DJANGO_DB: $DJANGO_DB
           echo TOX_SKIP_ENV: $TOX_SKIP_ENV
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
       - name: Print Python Version
         run: python --version --version
