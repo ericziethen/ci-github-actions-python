@@ -38,9 +38,9 @@ jobs:
     name: Python ${{ matrix.python-version }} - Django DB ${{ matrix.django-db }}
     steps:
       - name: Set Environment Variables
-          env:
-            DJANGO_DB: ${{ matrix.django-db }}
-            TOX_SKIP_ENV: ".*all_filter_volume_test.*"
+        env:
+          DJANGO_DB: ${{ matrix.django-db }}
+          TOX_SKIP_ENV: ".*all_filter_volume_test.*"
       - name: Print Environment Variables
         run: |
           echo DJANGO_DB: $DJANGO_DB
