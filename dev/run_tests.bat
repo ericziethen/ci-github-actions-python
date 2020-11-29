@@ -10,9 +10,6 @@ set TEST_DIR=%SCRIPT_DIR%Testing
 set ERROR_FOUND=
 set ERROR_LIST=
 
-echo No or unexpected Argument "%1" Passed
-goto goto error
-
 :run_tests
 echo ### Start Testing ###
 call:run_tester "Pytest"        "%TEST_DIR%\RunPytest.bat"
