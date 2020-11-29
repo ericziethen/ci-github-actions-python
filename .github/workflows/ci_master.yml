@@ -6,28 +6,16 @@ on: [pull_request, push]
 jobs:
   # Set the job key. The key is displayed as the job name
   # when a job name is not provided
-  generic_ci:
-    # Placeholder Job
-    name: Placeholder Job
-    # Set the type of machine to run on
-    runs-on: ubuntu-latest
 
-    steps:
-      # Print something
-      - name: Placeholder printing
-        run: echo "Placeholder printing"
+  # failed_job:
+  #   # The easiest way to deal with that to exclude the job that can faile from the merge checks on github
+  #   # That way the issue will be visible in the PR but can still be merged
+  #   name: Failed Job allowed to fail
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Fail Step
+  #       run: exit 1
 
-      - name: Another Step
-        run: echo "another step"
-
-  failed_job:
-    # The easiest way to deal with that to exclude the job that can faile from the merge checks on github
-    # That way the issue will be visible in the PR but can still be merged
-    name: Failed Job allowed to fail
-    runs-on: ubuntu-latest
-    steps:
-      - name: Fail Step
-        run: exit 1
 
   matrix_expansion_job:
     runs-on: ubuntu-latest
