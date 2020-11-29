@@ -58,6 +58,7 @@ jobs:
           coverage erase
           # Run tox using the version of Python in `PATH`
           #tox -e py
+          tox
       - name: Handle Coverage
         run: |
           coverage combine --append
