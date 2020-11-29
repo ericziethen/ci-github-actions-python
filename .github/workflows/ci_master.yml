@@ -50,6 +50,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
   run_linters:
+    runs-on: ubuntu-latest
     name: Latest Dev - Linting and Checks
     steps:
       - uses: actions/checkout@v2
@@ -74,6 +75,7 @@ jobs:
         run: ./dev/run_linters.sh
 
   run_safety_checks:
+    runs-on: ubuntu-latest
     name: Check Package Safety (Failure Allowed)
     steps:
       - uses: actions/checkout@v2
