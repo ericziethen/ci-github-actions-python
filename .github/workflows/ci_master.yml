@@ -53,6 +53,10 @@ jobs:
     name: Latest Dev - Linting and Checks
     steps:
       - uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
       - name: Setup Env
         run: |
           pip --version
@@ -61,10 +65,7 @@ jobs:
           pip list
           python -m pip install --upgrade pip pipenv
           pip list
-      - name: Setup Requirements
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.9
+      - name: Install Dependencies
         run: |
           # don't use the '--upgrade' to not upgrade pinned requirements with generic ones
           pip install -r requirements.txt
@@ -76,6 +77,10 @@ jobs:
     name: Check Package Safety (Failure Allowed)
     steps:
       - uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
       - name: Setup Env
         run: |
           pip --version
@@ -84,10 +89,7 @@ jobs:
           pip list
           python -m pip install --upgrade pip pipenv
           pip list
-      - name: Setup Requirements
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.9
+      - name: Install Dependencies
         run: |
           # don't use the '--upgrade' to not upgrade pinned requirements with generic ones
           pip install -r requirements.txt
