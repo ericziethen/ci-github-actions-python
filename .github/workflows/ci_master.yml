@@ -33,8 +33,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.9, 3.8, 3.7, 3.6]
-        django-db: [SQLITE, POSTGRES]
+        #python-version: [3.9, 3.8, 3.7, 3.6]
+        python-version: [3.9, 3.8]
+        #django-db: [SQLITE, POSTGRES]
+        django-db: [SQLITE]
     name: Python ${{ matrix.python-version }} - Django DB ${{ matrix.django-db }}
     steps:
       - uses: actions/checkout@v2
@@ -55,7 +57,7 @@ jobs:
         run: |
           coverage erase
           # Run tox using the version of Python in `PATH`
-          tox -e py
+          #tox -e py
       - name: Handle Coverage
         run: |
           coverage combine --append
