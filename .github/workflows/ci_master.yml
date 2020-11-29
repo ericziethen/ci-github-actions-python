@@ -48,5 +48,53 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Print Python Version
-        run: python --version --version
+
+  run_linters:
+    runs-on: ubuntu-latest
+    name: Latest Dev - Linting and Checks
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+      - name: Setup Env
+        run: |
+          pip --version
+          python --version --version
+          python -c "import sqlite3; print('sqlite3 Version on Python:', sqlite3.sqlite_version)"
+          pip list
+          python -m pip install --upgrade pip pipenv
+          pip list
+      - name: Install Dependencies
+        run: |
+          # don't use the '--upgrade' to not upgrade pinned requirements with generic ones
+          pip install -r requirements.txt
+          pip list
+      - name: Run Linters
+        run: ./dev/run_linters.sh
+
+  run_safety_checks:
+    runs-on: ubuntu-latest
+    name: Check Package Safety (Failure Allowed)
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+      - name: Setup Env
+        run: |
+          pip --version
+          python --version --version
+          python -c "import sqlite3; print('sqlite3 Version on Python:', sqlite3.sqlite_version)"
+          pip list
+          python -m pip install --upgrade pip pipenv
+          pip list
+      - name: Install Dependencies
+        run: |
+          # don't use the '--upgrade' to not upgrade pinned requirements with generic ones
+          pip install -r requirements.txt
+          pip list
+      - name: Run Package Safety
+        run: ./dev/check_package_safety.sh
