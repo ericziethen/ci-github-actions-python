@@ -48,6 +48,16 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
+      - name: Install Dependencies
+        run: pip install coverage tox-travis
+      - name: Run Tests
+        run: |
+          coverage erase
+          tox
+      - name: Handle Coverage
+        run: |
+          coverage combine --append
+          coverage report -m
 
   run_linters:
     runs-on: ubuntu-latest
