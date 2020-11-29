@@ -37,6 +37,7 @@ jobs:
         django-db: [SQLITE, POSTGRES]
     name: Python ${{ matrix.python-version }} - Django DB ${{ matrix.django-db }}
     steps:
+      - uses: actions/checkout@v2
       - name: Set Environment Variables
         env:
           DJANGO_DB: ${{ matrix.django-db }}
