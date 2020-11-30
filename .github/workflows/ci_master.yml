@@ -47,10 +47,10 @@ jobs:
           # Run tox using the version of Python in `PATH`
           #tox -e py
           tox
-      - name: Handle Coverage
-        run: |
-          coverage combine --append
-          coverage report -m
+      # - name: Handle Coverage
+      #   run: |
+      #     coverage combine --append
+      #     coverage report -m
 
   run_linters:
     runs-on: ubuntu-latest
