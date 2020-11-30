@@ -27,25 +27,6 @@ run_tester () {
 ##### END OF FUNCTION DEFINITIONS #####
 #######################################
 
-# ${1,,} - Using Lowercase comparison
-if [ "${1,,}" == "sqlite" ];
-then
-    echo 'Argument "$1" passed, use postgresql as db'
-    export DJANGO_SETTINGS_MODULE=django_test_proj.settings
-elif [ "${1,,}" == "postgres-travis" ];
-then
-    echo 'Argument "$1" passed, use postgresql for travis as db'
-    export DJANGO_SETTINGS_MODULE=django_test_proj.settings_postgres_travis
-elif [ "${1,,}" == "postgres-local" ];
-then
-    echo 'Argument "$1" passed, use postgresql for local dev as db'
-    export DJANGO_SETTINGS_MODULE=django_test_proj.settings_postgres_local
-else
-    echo No or unexpected Argument "$1" Passed
-    exit 1
-fi
-
-echo DJANGO_SETTINGS_MODULE: "$DJANGO_SETTINGS_MODULE"
 SCRIPT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 TEST_DIR=$SCRIPT_PATH/Testing
 

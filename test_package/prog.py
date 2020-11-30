@@ -6,6 +6,8 @@ def sum_numbers(num1, num2):
     return num1 + num2
 
 
+# pylint: disable=pointless-string-statement
+'''
 def main():
     """Run Main function."""
     num1 = 5
@@ -15,3 +17,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+'''
