@@ -44,13 +44,14 @@ jobs:
       - name: Run Tests
         run: |
           coverage erase
-          # Run tox using the version of Python in `PATH`
-          #tox -e py
           tox
-      # - name: Handle Coverage
-      #   run: |
-      #     coverage combine --append
-      #     coverage report -m
+      - name: "Convert coverage"
+        run: "python -m coverage xml"
+      - name: "Upload coverage to Codecov"
+        # Using version https://github.com/codecov/codecov-action/releases/tag/v1.0.15
+        uses: "codecov/codecov-action@239febf655bba88b16ff5dea1d3135ea8663a1f9"
+        with:
+          fail_ci_if_error: true
 
   run_linters:
     runs-on: ubuntu-latest
