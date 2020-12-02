@@ -16,6 +16,15 @@ jobs:
   #     - name: Fail Step
   #       run: exit 1
 
+  os_exansion_job:
+    strategy:
+      matrix:
+        os: ["ubuntu-latest", "windows-latest", "macos-latest"]
+    name: OS Expansion Test - ${{ matrix.os }} - Python ${{ matrix.python-version }} - Django DB ${{ matrix.django-db }}
+    runs-on: "${{ matrix.os }}"
+    steps:
+      - name: Say Hello
+        run: echo Hello ${{ matrix.os }}
 
   matrix_expansion_job:
     strategy:
@@ -24,8 +33,8 @@ jobs:
         python-version: [3.9, 3.8]
         #django-db: [SQLITE, POSTGRES]
         django-db: [SQLITE]
-        os: ["ubuntu-latest", "windows-latest", "macos-latest"]
-    name: Python ${{ matrix.python-version }} - Django DB ${{ matrix.django-db }}
+        os: ["ubuntu-latest"]
+    name: OS ${{ matrix.os }} - Python ${{ matrix.python-version }} - Django DB ${{ matrix.django-db }}
     runs-on: "${{ matrix.os }}"
     steps:
       - uses: actions/checkout@v2
