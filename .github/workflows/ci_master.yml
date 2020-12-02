@@ -16,6 +16,14 @@ jobs:
   #     - name: Fail Step
   #       run: exit 1
 
+  show_details:
+    runs-on: ubuntu-latest
+    name: Show Details
+    steps:
+      - name: Show Details
+        run: |
+          echo github.action:       github.action
+
   os_exansion_job:
     strategy:
       matrix:
