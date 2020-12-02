@@ -10,7 +10,7 @@ def test_sum_ok2():
 def test_sum_ok3():
     assert sum_numbers(-6, 6) == 0
 
-#'''
+'''
 def test_fails():
     assert sum_numbers(1, 3) == 42
-#'''
+'''
