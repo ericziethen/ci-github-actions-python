@@ -22,101 +22,101 @@ jobs:
     steps:
       - name: Show Details
         run: |
-          echo github.action:       github.action
+          echo github.action:       ${{ github.action }}
 
-  os_exansion_job:
-    strategy:
-      matrix:
-        os: ["ubuntu-latest", "windows-latest", "macos-latest"]
-    name: OS Expansion Test - ${{ matrix.os }} - Python ${{ matrix.python-version }} - Django DB ${{ matrix.django-db }}
-    runs-on: "${{ matrix.os }}"
-    steps:
-      - name: Say Hello
-        run: echo Hello ${{ matrix.os }}
+  # os_exansion_job:
+  #   strategy:
+  #     matrix:
+  #       os: ["ubuntu-latest", "windows-latest", "macos-latest"]
+  #   name: OS Expansion Test - ${{ matrix.os }} - Python ${{ matrix.python-version }} - Django DB ${{ matrix.django-db }}
+  #   runs-on: "${{ matrix.os }}"
+  #   steps:
+  #     - name: Say Hello
+  #       run: echo Hello ${{ matrix.os }}
 
-  matrix_expansion_job:
-    strategy:
-      matrix:
-        #python-version: [3.9, 3.8, 3.7, 3.6]
-        python-version: [3.9, 3.8]
-        #django-db: [SQLITE, POSTGRES]
-        django-db: [SQLITE]
-        os: ["ubuntu-latest"]
-    name: OS ${{ matrix.os }} - Python ${{ matrix.python-version }} - Django DB ${{ matrix.django-db }}
-    runs-on: "${{ matrix.os }}"
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set Environment Variables
-        env:
-          DJANGO_DB: ${{ matrix.django-db }}
-          TOX_SKIP_ENV: ".*all_filter_volume_test.*"
-        run: |
-          echo DJANGO_DB: $DJANGO_DB
-          echo TOX_SKIP_ENV: $TOX_SKIP_ENV
-      - name: Setup Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: ${{ matrix.python-version }}
-      - name: Install Dependencies
-        run: pip install coverage tox-gh-actions
-      - name: Run Tests
-        run: |
-          coverage erase
-          tox
-      - name: "Convert coverage"
-        run: "python -m coverage xml"
-      - name: "Upload coverage to Codecov"
-        # Using version https://github.com/codecov/codecov-action/releases/tag/v1.0.15
-        uses: "codecov/codecov-action@239febf655bba88b16ff5dea1d3135ea8663a1f9"
-        with:
-          fail_ci_if_error: true
+  # matrix_expansion_job:
+  #   strategy:
+  #     matrix:
+  #       #python-version: [3.9, 3.8, 3.7, 3.6]
+  #       python-version: [3.9, 3.8]
+  #       #django-db: [SQLITE, POSTGRES]
+  #       django-db: [SQLITE]
+  #       os: ["ubuntu-latest"]
+  #   name: OS ${{ matrix.os }} - Python ${{ matrix.python-version }} - Django DB ${{ matrix.django-db }}
+  #   runs-on: "${{ matrix.os }}"
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Set Environment Variables
+  #       env:
+  #         DJANGO_DB: ${{ matrix.django-db }}
+  #         TOX_SKIP_ENV: ".*all_filter_volume_test.*"
+  #       run: |
+  #         echo DJANGO_DB: $DJANGO_DB
+  #         echo TOX_SKIP_ENV: $TOX_SKIP_ENV
+  #     - name: Setup Python
+  #       uses: actions/setup-python@v2
+  #       with:
+  #         python-version: ${{ matrix.python-version }}
+  #     - name: Install Dependencies
+  #       run: pip install coverage tox-gh-actions
+  #     - name: Run Tests
+  #       run: |
+  #         coverage erase
+  #         tox
+  #     - name: "Convert coverage"
+  #       run: "python -m coverage xml"
+  #     - name: "Upload coverage to Codecov"
+  #       # Using version https://github.com/codecov/codecov-action/releases/tag/v1.0.15
+  #       uses: "codecov/codecov-action@239febf655bba88b16ff5dea1d3135ea8663a1f9"
+  #       with:
+  #         fail_ci_if_error: true
 
-  run_linters:
-    runs-on: ubuntu-latest
-    name: Latest Dev - Linting and Checks
-    steps:
-      - uses: actions/checkout@v2
-      - name: Setup Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.9'
-      - name: Setup Env
-        run: |
-          pip --version
-          python --version --version
-          python -c "import sqlite3; print('sqlite3 Version on Python:', sqlite3.sqlite_version)"
-          pip list
-          python -m pip install --upgrade pip pipenv
-          pip list
-      - name: Install Dependencies
-        run: |
-          # don't use the '--upgrade' to not upgrade pinned requirements with generic ones
-          pip install -r requirements.txt
-          pip list
-      - name: Run Linters
-        run: ./dev/run_linters.sh
+  # run_linters:
+  #   runs-on: ubuntu-latest
+  #   name: Latest Dev - Linting and Checks
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Setup Python
+  #       uses: actions/setup-python@v2
+  #       with:
+  #         python-version: '3.9'
+  #     - name: Setup Env
+  #       run: |
+  #         pip --version
+  #         python --version --version
+  #         python -c "import sqlite3; print('sqlite3 Version on Python:', sqlite3.sqlite_version)"
+  #         pip list
+  #         python -m pip install --upgrade pip pipenv
+  #         pip list
+  #     - name: Install Dependencies
+  #       run: |
+  #         # don't use the '--upgrade' to not upgrade pinned requirements with generic ones
+  #         pip install -r requirements.txt
+  #         pip list
+  #     - name: Run Linters
+  #       run: ./dev/run_linters.sh
 
-  run_safety_checks:
-    runs-on: ubuntu-latest
-    name: Check Package Safety (Failure Allowed)
-    steps:
-      - uses: actions/checkout@v2
-      - name: Setup Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.9'
-      - name: Setup Env
-        run: |
-          pip --version
-          python --version --version
-          python -c "import sqlite3; print('sqlite3 Version on Python:', sqlite3.sqlite_version)"
-          pip list
-          python -m pip install --upgrade pip pipenv
-          pip list
-      - name: Install Dependencies
-        run: |
-          # don't use the '--upgrade' to not upgrade pinned requirements with generic ones
-          pip install -r requirements.txt
-          pip list
-      - name: Run Package Safety
-        run: ./dev/check_package_safety.sh
+  # run_safety_checks:
+  #   runs-on: ubuntu-latest
+  #   name: Check Package Safety (Failure Allowed)
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Setup Python
+  #       uses: actions/setup-python@v2
+  #       with:
+  #         python-version: '3.9'
+  #     - name: Setup Env
+  #       run: |
+  #         pip --version
+  #         python --version --version
+  #         python -c "import sqlite3; print('sqlite3 Version on Python:', sqlite3.sqlite_version)"
+  #         pip list
+  #         python -m pip install --upgrade pip pipenv
+  #         pip list
+  #     - name: Install Dependencies
+  #       run: |
+  #         # don't use the '--upgrade' to not upgrade pinned requirements with generic ones
+  #         pip install -r requirements.txt
+  #         pip list
+  #     - name: Run Package Safety
+  #       run: ./dev/check_package_safety.sh
