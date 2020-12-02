@@ -20,9 +20,23 @@ jobs:
     runs-on: ubuntu-latest
     name: Show Details
     steps:
+      # https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions
       - name: Show Details
         run: |
-          echo github.action:       ${{ github.action }}
+          echo github.action:       '${{ github.action }}'
+          echo github.action_path:       '${{ github.action_path }}'
+          echo github.actor:       '${{ github.actor }}'
+          echo github.base_ref:       '${{ github.base_ref }}'
+          echo github.event:       '${{ github.event }}'
+          echo github.event_name:       '${{ github.event_name }}'
+          echo github.event_path:       '${{ github.event_path }}'
+          echo github.head_ref:       '${{ github.head_ref }}'
+          echo github.job:       '${{ github.job }}'
+          echo github.ref:       '${{ github.ref }}'
+          echo github.repository:       '${{ github.repository }}'
+          echo github.repository_owner:       '${{ github.repository_owner }}'
+          echo github.workflow:       '${{ github.workflow }}'
+          echo github.workspace:       '${{ github.workspace }}'
 
   # os_exansion_job:
   #   strategy:
