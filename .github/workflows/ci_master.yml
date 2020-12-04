@@ -145,7 +145,8 @@ jobs:
 
   deployment:
     runs-on: ubuntu-latest
-    needs: [matrix_expansion_job, run_linters]
+    #needs: [matrix_expansion_job, run_linters]
+    needs: [run_linters]
     name: Deployment
     steps:
       - uses: actions/checkout@v2
