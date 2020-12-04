@@ -160,11 +160,12 @@ jobs:
           python --version --version
           pip list
           python -m pip install --upgrade pip pipenv
-          pip install wheel
+          pip install wheel twine
           pip list
       - name: Create Wheel
         run: |
           python setup.py sdist bdist_wheel
+          echo Command: 'dir dist/*'
           dir dist/*
       - name: Check Wheel
         run: |
