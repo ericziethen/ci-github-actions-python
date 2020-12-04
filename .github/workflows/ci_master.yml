@@ -161,7 +161,10 @@ jobs:
           python -m pip install --upgrade pip pipenv
           pip install wheel
           pip list
-      - name: Deploy
+      - name: Create Wheel
         run: |
           python setup.py sdist bdist_wheel
           dir dist/*
+      - name: Check Wheel
+        run: |
+          twine check dist/*
