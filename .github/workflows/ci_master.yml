@@ -164,7 +164,7 @@ jobs:
           pip list
       - name: Create Wheel
         run: |
-          ./dev/Packaging/create_wheel.bat
+          ./dev/Packaging/create_wheel.sh
           echo Command: 'dir dist/*'
           dir dist/*
       - name: Check Wheel
