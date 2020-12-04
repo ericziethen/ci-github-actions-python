@@ -164,9 +164,14 @@ jobs:
           pip list
       - name: Create Wheel
         run: |
-          python setup.py sdist bdist_wheel
+          ./dev/Packaging/create_wheel.bat
           echo Command: 'dir dist/*'
           dir dist/*
       - name: Check Wheel
         run: |
-          twine check dist/*
+          ./dev/Packaging/check_wheels.sh
+      - name: Publish distribution 📦 to Test PyPI
+        uses: pypa/gh-action-pypi-publish@master
+        with:
+          password: ${{ secrets.PYPY_PROJ_TOKEN }}
+          repository_url: https://test.pypi.org/legacy/
