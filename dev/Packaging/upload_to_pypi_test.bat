@@ -6,7 +6,7 @@ setlocal
 
 set PROJ_MAIN_DIR=%~dp0..\..
 
-set PKG_NAME=django-property-filter
+set PKG_NAME=ci-github-actions-python
 
 pushd "%PROJ_MAIN_DIR%"
 
