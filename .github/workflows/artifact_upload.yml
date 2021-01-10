@@ -31,8 +31,8 @@ jobs:
 
           echo "Command: 'mkdir -p ${DATA_DIR_1}'"
           mkdir -p ${DATA_DIR_1}
-          echo "Command: 'mkdir -p ${DATA_DIR_1}'"
-          mkdir -p ${DATA_DIR_1}
+          echo "Command: 'mkdir -p ${DATA_DIR_2}'"
+          mkdir -p ${DATA_DIR_2}
 
           echo "Command: 'ls -altR ${DATA_DIR}'"
           ls -altR ${DATA_DIR}
