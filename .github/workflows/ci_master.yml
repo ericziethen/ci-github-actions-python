@@ -15,3 +15,5 @@ jobs:
       - name: Fail but ignore
         run: |
           qwerty
+          # Try to ignore failiure
+          exit 0
